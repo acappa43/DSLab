@@ -1,4 +1,4 @@
-package ciic4020.set;
+package ciic4020.lab1.set;
 
 
 import java.util.Iterator;
@@ -7,7 +7,7 @@ public class DynamicSet<E> implements Set<E> {
 
 	// static set
 	private StaticSet<E> theSet;
-	
+
 	// current max capacity
 	private int maxCapacity;
 
@@ -114,6 +114,28 @@ public class DynamicSet<E> implements Set<E> {
 		}
 		//if(this.isSubset(temp))
 		return false;
+	}
+	public static boolean checkDisjoint(Object[] sets) {
+		// TODO Auto-generated method stub
+		Set<Object> result = new DynamicSet<Object>(sets.length);
+		for (int i = 0; i < sets.length; i++) {
+			for (Object o : sets) {
+				if (((Set<Object>) sets[i]).isMember(o)){
+					result.add(o);
+				}
+			}
+		}
+		if(result.size() == 0) {
+			return true;
+		}		
+		return false;
+	}
+	@Override
+	public Set<Set<E>> singletonSets() {
+		// TODO Auto-generated method stub
+		Set<Set<E>> result = new StaticSet<Set<E>>(this.size());
+
+		return null;
 	}
 
 }

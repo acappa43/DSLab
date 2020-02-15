@@ -1,11 +1,11 @@
-package ciic4020.set.test;
+package ciic4020.lab1.set.test;
 
 
 import java.util.Scanner;
 
-import ciic4020.set.Set;
-import ciic4020.set.StaticSet;
-import ciic4020.set.DynamicSet;
+import ciic4020.lab1.set.DynamicSet;
+import ciic4020.lab1.set.Set;
+import ciic4020.lab1.set.StaticSet;
 
 public class SetTest {
 

@@ -1,11 +1,11 @@
-package ciic4020.bag.test;
+package ciic4020.lab1.bag.test;
 
 
 import java.util.Scanner;
 
-import ciic4020.bag.Bag;
-import ciic4020.bag.DynamicBag;
-import ciic4020.bag.StaticBag;
+import ciic4020.lab1.bag.Bag;
+import ciic4020.lab1.bag.DynamicBag;
+import ciic4020.lab1.bag.StaticBag;
 
 public class BagTest {
 

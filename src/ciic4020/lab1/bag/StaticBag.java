@@ -1,4 +1,4 @@
-package ciic4020.bag;
+package ciic4020.lab1.bag;
 
 
 import java.util.Iterator;
