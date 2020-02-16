@@ -78,16 +78,13 @@ public class DynamicBag implements Bag {
 	public Bag moreFrequentThan(Object obj) {
 		// TODO Auto-generated method stub
 		Bag result = new DynamicBag(this.size());
-		if(!this.isMember(obj)) {
-			return result;
-		}
 		for(Object o: this) {
 			if(!result.isMember(o) && this.count(o)>this.count(obj)) {
 				result.add(o);
 			}
 		}
 		
-		return null;
+		return result;
 	}
 
 }

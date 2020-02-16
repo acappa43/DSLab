@@ -11,9 +11,9 @@ public class StaticSet<E> implements Set<E> {
 
 	// array of elements
 	private E elements[];
-	
+
 	private static final int DEFAULT_SET_SIZE = 10;
-	
+
 	public StaticSet(int maxCapacity) {
 		if (maxCapacity < 1)
 			throw new IllegalArgumentException("Max capacity must be at least 1");
@@ -23,7 +23,7 @@ public class StaticSet<E> implements Set<E> {
 
 	private class SetIterator<T> implements Iterator<T> {
 		private int currentPosition;
-		
+
 		public SetIterator() {
 			this.currentPosition = 0;
 		}
@@ -93,7 +93,7 @@ public class StaticSet<E> implements Set<E> {
 		for (int i = 0; i < this.size(); i++)
 			this.elements[i] = null;
 		this.currentSize = 0;
-		
+
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class StaticSet<E> implements Set<E> {
 		// Copy S1
 		for (Object obj : this)
 			S3.add((E) obj);
-		
+
 		// Copy elements of S2 not already in S1
 		for (Object obj : S2)
 		{
@@ -168,13 +168,32 @@ public class StaticSet<E> implements Set<E> {
 
 	public static boolean checkDisjoint(Object[] sets) {
 		// TODO Auto-generated method stub
+		Set<Integer> result = new DynamicSet<Integer>(sets.length);
+		Integer temp = 0;
+		for (int i = 0; i < sets.length; i++) {
+			for (int k = 1; k < sets.length-1; k++) {
+				if (((Set<Integer>) sets[i]).intersection((Set<Integer>) sets[k]).isEmpty()){
+					temp++;
+				}
+			}
+		}
+		if(temp > 0) {
+			return true;
+		}		
 		return false;
 	}
+
 
 	@Override
 	public Set<Set<E>> singletonSets() {
 		// TODO Auto-generated method stub
-		return null;
+		Set<Set<E>> result = new StaticSet<Set<E>>(this.size());
+		for (E e: this) {
+			Set<E> temp = new StaticSet<E>(1);
+			temp.add(e);
+			result.add(temp);
+		}
+		return result;
 	}
 
 }

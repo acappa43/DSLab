@@ -115,27 +115,34 @@ public class DynamicSet<E> implements Set<E> {
 		//if(this.isSubset(temp))
 		return false;
 	}
+	// TODO Auto-generated method stub
 	public static boolean checkDisjoint(Object[] sets) {
 		// TODO Auto-generated method stub
-		Set<Object> result = new DynamicSet<Object>(sets.length);
+		Set<Integer> result = new DynamicSet<Integer>(sets.length);
+		Integer temp = 0;
 		for (int i = 0; i < sets.length; i++) {
-			for (Object o : sets) {
-				if (((Set<Object>) sets[i]).isMember(o)){
-					result.add(o);
+			for (int k = 1; k < sets.length-1; k++) {
+				if (((Set<Integer>) sets[i]).intersection((Set<Integer>) sets[k]).isEmpty()){
+					temp++;
 				}
 			}
 		}
-		if(result.size() == 0) {
+		if(temp > 0) {
 			return true;
 		}		
 		return false;
 	}
+
 	@Override
 	public Set<Set<E>> singletonSets() {
 		// TODO Auto-generated method stub
-		Set<Set<E>> result = new StaticSet<Set<E>>(this.size());
-
-		return null;
+		Set<Set<E>> result = new DynamicSet<Set<E>>(this.size());
+		for (E e: this) {
+			Set<E> temp = new DynamicSet<E>(1);
+			temp.add(e);
+			result.add(temp);
+		}
+		return result;
 	}
 
 }

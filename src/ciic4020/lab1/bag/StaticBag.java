@@ -114,17 +114,14 @@ public class StaticBag implements Bag {
 
 	@Override
 	public Bag moreFrequentThan(Object obj) {
-		Bag result = new StaticBag(this.size());
-		if(!this.isMember(obj)) {
-			return result;
-		}
+		Bag result = new StaticBag(this.size()); 
 		for(Object o: this) {
 			if(!result.isMember(o) && this.count(o)>this.count(obj)) {
 				result.add(o);
 			}
 		}
 		
-		return null;
+		return result;
 	}
 
 }
