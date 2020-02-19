@@ -14,6 +14,7 @@ public interface List<E> extends Iterable<E> {
 	public int firstIndex(E obj);
 	public int lastIndex(E obj);
 	public int size();
+	public int replaceAll (E e, E f);
 	public boolean isEmpty();
 	public boolean contains(E obj);
 	public void clear();

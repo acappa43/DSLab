@@ -198,4 +198,15 @@ public class ArrayList<E> implements List<E> {
 	public Iterator<E> iterator() {
 		return new ListIterator();
 	}
-}
+	public static int totalCount(String s, List<String>[] list) {
+		int count = 0;
+		
+		return count;
+	}
+
+	@Override
+	public int replaceAll(E e, E f) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}    

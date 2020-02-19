@@ -283,4 +283,14 @@ public class LinkedList<E> implements List<E> {
 		while (size() > 0)
 			remove(0);
 	}
+
+	@Override
+	public int replaceAll(E e, E f) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public static int totalCount(String s, List<String> list) {
+		int count = 0;
+		return count;
+	}
 }
