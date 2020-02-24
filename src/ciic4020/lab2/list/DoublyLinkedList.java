@@ -172,8 +172,9 @@ public class DoublyLinkedList<E> implements List<E> {
 			throw new IndexOutOfBoundsException();
 		// If we have A <-> B <-> C, need to get to A <-> C
 		rmNode = get_node(index); // Get the node that is to be removed
-
-		// TODO For a DLL, what needs to be done?
+		
+		rmNode.getPrev().setNext(rmNode.getNext());
+		rmNode.getNext().setPrev(rmNode.getPrev());
 
 		rmNode.clear();
 		currentSize--;		
@@ -218,7 +219,8 @@ public class DoublyLinkedList<E> implements List<E> {
 				/* TODO For a DLL, what needs to be done?
 				 * You can declare more Node variables if it helps make things clear.
 				 */
-
+				curNode.setNext(nextNode.getNext());
+				nextNode.getNext().setPrev(curNode);
 				nextNode.clear();
 				currentSize--;
 				counter++;

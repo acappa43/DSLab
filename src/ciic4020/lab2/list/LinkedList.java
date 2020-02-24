@@ -8,16 +8,16 @@ public class LinkedList<E> implements List<E> {
 	private class Node {
 		private E value;
 		private Node next;
-		
+
 		public Node(E value, Node next) {
 			this.value = value;
 			this.next = next;
 		}
-		
+
 		public Node(E value) {
 			this(value, null); // Delegate to other constructor
 		}
-		
+
 		public Node() {
 			this(null, null); // Delegate to other constructor
 		}
@@ -37,22 +37,22 @@ public class LinkedList<E> implements List<E> {
 		public void setNext(Node next) {
 			this.next = next;
 		}
-		
+
 		public void clear() {
 			value = null;
 			next = null;
 		}				
 	} // End of Node class
 
-	
+
 	private class ListIterator implements Iterator<E> {
 
 		private Node nextNode;
-		
+
 		public ListIterator() {
 			nextNode = header.getNext();
 		}
-	
+
 		@Override
 		public boolean hasNext() {
 			return nextNode != null;
@@ -68,15 +68,15 @@ public class LinkedList<E> implements List<E> {
 			else
 				throw new NoSuchElementException();				
 		}
-		
+
 	} // End of ListIterator class
 
-	
+
 	// private fields
 	private Node header;	
 	private int currentSize;
 
-	
+
 	public LinkedList() {
 		header = new Node();
 		currentSize = 0;
@@ -102,7 +102,7 @@ public class LinkedList<E> implements List<E> {
 	@Override
 	public void add(int index, E obj) {
 		Node curNode, newNode;
-		
+
 		// First confirm index is a valid position
 		// We allow for index == size() and delegate to add(object).
 		if (index < 0 || index > size())
@@ -124,13 +124,13 @@ public class LinkedList<E> implements List<E> {
 	public boolean remove(E obj) {
 		Node curNode = header;
 		Node nextNode = curNode.getNext();
-		
+
 		// Traverse the list until we find the element or we reach the end
 		while (nextNode != null && !nextNode.getValue().equals(obj)) {
 			curNode = nextNode;
 			nextNode = nextNode.getNext();
 		}
-		
+
 		// Need to check if we found it
 		if (nextNode != null) { // Found it!
 			// If we have A -> B -> C and want to remove B, make A point to C 
@@ -142,7 +142,7 @@ public class LinkedList<E> implements List<E> {
 		else
 			return false;
 	}
-	
+
 	@Override
 	public boolean remove(int index) {
 		Node curNode, rmNode;
@@ -155,14 +155,14 @@ public class LinkedList<E> implements List<E> {
 		curNode.setNext(rmNode.getNext());
 		rmNode.clear();
 		currentSize--;		
-		
+
 		return true;
 	}
-	
+
 	/* Private method to return the node at position index */
 	private Node get_node(int index) {
 		Node curNode;
-	
+
 		/* First confirm index is a valid position
 		   Allow -1 so that header node may be returned */
 		if (index < -1 || index >= size())
@@ -179,14 +179,14 @@ public class LinkedList<E> implements List<E> {
 		int counter = 0;
 		Node curNode = header;
 		Node nextNode = curNode.getNext();
-		
+
 		/* We used the following in ArrayList, and it would also work here,
 		 * but it would have running time of O(n^2).
 		 * 
 		 * while (remove(obj))
 		 * 		counter++;
 		 */
-		
+
 		// Traverse the entire list
 		while (nextNode != null) { 
 			if (nextNode.getValue().equals(obj)) { // Remove it!
@@ -299,11 +299,17 @@ public class LinkedList<E> implements List<E> {
 	}
 	public static int totalCount(String s, List<String>[] list) {
 		int count = 0;
-		for (int i = 0; i < list[i].size(); i++) {
+		int tot= 0;
+		for (int i = 0; i < list.length; i++) {
 			if(list[i].contains(s)) {
-				count++;
+				for (String s1: list[i]) {
+					if(s1.equals(s)) {
+						count ++;
+					}
+				}
 			}
 		}
+	
 		return count;
 	}
 
@@ -321,7 +327,7 @@ public class LinkedList<E> implements List<E> {
 			prev = cur;
 			cur = next;
 		}
-		
+
 		return this;
 	}
 }

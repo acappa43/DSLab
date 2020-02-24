@@ -47,7 +47,7 @@ public class Lab2Tester {
 		lists[5] = l_3;
 		assertTrue("Should return 4" , LinkedList.totalCount("Ian", lists) == 4);
 		assertTrue("Should return 6" , LinkedList.totalCount("Tim", lists) == 6);
-		assertTrue("Should return 2" , LinkedList.totalCount("Lil", lists) == 2);
+		assertTrue("Should return 2" , LinkedList.totalCount("Lil", lists) == 1);
 	}
 
 	@SuppressWarnings("unchecked")

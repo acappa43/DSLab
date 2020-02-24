@@ -198,15 +198,22 @@ public class ArrayList<E> implements List<E> {
 	public Iterator<E> iterator() {
 		return new ListIterator();
 	}
-	public static int totalCount(String s, List<String> list) {
+	public static int totalCount(String s, List<String>[] list) {
 		int count = 0;
-		for (int i = 0; i < list.size(); i++) {
-			if(list.get(i).contains(s)) {
-				count++;
+		int tot= 0;
+		for (int i = 0; i < list.length; i++) {
+			if(list[i].contains(s)) {
+				for (String s1: list[i]) {
+					if(s1.equals(s)) {
+						count ++;
+					}
+				}
 			}
 		}
+	
 		return count;
 	}
+
 
 	@Override
 	public int replaceAll(E e, E f) {
@@ -229,9 +236,10 @@ public class ArrayList<E> implements List<E> {
 		if(this.currentSize == 0) {
 			return result;
 		}
-		for (int i = currentSize; i >=0; i--) {
+		int pos = 0;
+		for (int i = currentSize-1; i >=1; i--) {
 			E o = this.get(i);
-			result.add(i, o);
+			result.add(pos, o);
 		}
 		return result;
 	}
