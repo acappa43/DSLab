@@ -3,22 +3,23 @@ package ciic4020.lab2.list;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
 public class DoublyLinkedList<E> implements List<E> {
 
 	private class Node {
 		private E value;
 		private Node next, prev;
-		
+
 		public Node(E value, Node next, Node prev) {
 			this.value = value;
 			this.next = next;
 			this.prev = prev;
 		}
-		
+
 		public Node(E value) {
 			this(value, null, null); // Delegate to other constructor
 		}
-		
+
 		public Node() {
 			this(null, null, null); // Delegate to other constructor
 		}
@@ -38,7 +39,7 @@ public class DoublyLinkedList<E> implements List<E> {
 		public void setNext(Node next) {
 			this.next = next;
 		}
-		
+
 		public Node getPrev() {
 			return prev;
 		}
@@ -46,22 +47,22 @@ public class DoublyLinkedList<E> implements List<E> {
 		public void setPrev(Node prev) {
 			this.prev = prev;
 		}
-		
+
 		public void clear() {
 			value = null;
 			next = prev = null;
 		}				
 	} // End of Node class
 
-	
+
 	private class ListIterator implements Iterator<E> {
 
 		private Node nextNode;
-		
+
 		public ListIterator() {
 			nextNode = header.getNext();
 		}
-	
+
 		@Override
 		public boolean hasNext() {
 			return nextNode != trailer;
@@ -77,15 +78,15 @@ public class DoublyLinkedList<E> implements List<E> {
 			else
 				throw new NoSuchElementException();				
 		}
-		
+
 	} // End of ListIterator class
 
-	
+
 	/* private fields */
 	private Node header, trailer; // "dummy" nodes
 	private int currentSize;
 
-	
+
 	public DoublyLinkedList() {
 		header = new Node();
 		trailer = new Node();
@@ -114,7 +115,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	@Override
 	public void add(int index, E obj) {
 		Node curNode, newNode;
-		
+
 		/* First confirm index is a valid position
 		   We allow for index == size() and delegate to add(object). */
 		if (index < 0 || index > size())
@@ -138,20 +139,20 @@ public class DoublyLinkedList<E> implements List<E> {
 	public boolean remove(E obj) {
 		Node curNode = header;
 		Node nextNode = curNode.getNext();
-		
+
 		// Traverse the list until we find the element or we reach the end
 		while (nextNode != trailer && !nextNode.getValue().equals(obj)) {
 			curNode = nextNode;
 			nextNode = nextNode.getNext();
 		}
-		
+
 		// Need to check if we found it
 		if (nextNode != trailer) { // Found it!
 			// If we have A <-> B <-> C, need to get to A <-> C
 			curNode.setNext(nextNode.getNext());
-			
+
 			// TODO For a DLL, what else needs to be done? See comment above for a hint.
-	
+
 			nextNode.clear(); // free up resources
 			currentSize--;
 			return true;
@@ -159,7 +160,7 @@ public class DoublyLinkedList<E> implements List<E> {
 		else
 			return false;
 	}
-	
+
 	@Override
 	public boolean remove(int index) {
 		Node rmNode;
@@ -171,19 +172,19 @@ public class DoublyLinkedList<E> implements List<E> {
 			throw new IndexOutOfBoundsException();
 		// If we have A <-> B <-> C, need to get to A <-> C
 		rmNode = get_node(index); // Get the node that is to be removed
-		
+
 		// TODO For a DLL, what needs to be done?
 
 		rmNode.clear();
 		currentSize--;		
-		
+
 		return true;
 	}
-	
+
 	/* Private method to return the node at position index */
 	private Node get_node(int index) {
 		Node curNode;
-	
+
 		/* First confirm index is a valid position
 		   Allow -1 so that header node may be returned */
 		if (index < -1 || index >= size())
@@ -201,19 +202,19 @@ public class DoublyLinkedList<E> implements List<E> {
 		int counter = 0;
 		Node curNode = header;
 		Node nextNode = curNode.getNext();
-		
+
 		/* We used the following in ArrayList, and it would also work here,
 		 * but it would have running time of O(n^2).
 		 * 
 		 * while (remove(obj))
 		 * 		counter++;
 		 */
-		
+
 		// Traverse the entire list
 		while (nextNode != trailer) { 
 			if (nextNode.getValue().equals(obj)) {
 				// Remove nextNode
-				
+
 				/* TODO For a DLL, what needs to be done?
 				 * You can declare more Node variables if it helps make things clear.
 				 */
@@ -314,6 +315,39 @@ public class DoublyLinkedList<E> implements List<E> {
 	@Override
 	public int replaceAll(E e, E f) {
 		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		for (int i = 0; i < this.size(); i++) {
+			if(this.get_node(i).equals(e)) {
+				this.remove(i);
+				this.add(f);
+				count++;
+			}
+		}
+		return count;
 	}
+	@Override
+	public List<E> reverse() {
+		// TODO Auto-generated method stub
+		Node temp = null;  
+		Node current = header;  
+
+		/* swap next and prev for all nodes of  
+	        doubly linked list */
+		while (current != null)  
+		{  
+			temp = current.prev;  
+			current.prev = current.next;  
+			current.next = temp;  
+			current = current.prev;  
+		}  
+
+		/* Before changing head, check for 
+	          the cases like empty list and 
+	         list with only one node */
+		if (temp != null) 
+		{  
+			header = temp.prev;  
+		}  
+		return this;
+	}  
 }

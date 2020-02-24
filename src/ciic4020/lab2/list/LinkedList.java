@@ -287,10 +287,41 @@ public class LinkedList<E> implements List<E> {
 	@Override
 	public int replaceAll(E e, E f) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-	public static int totalCount(String s, List<String> list) {
 		int count = 0;
+		for (int i = 0; i < this.size(); i++) {
+			if(this.get_node(i).equals(e)) {
+				this.remove(i);
+				this.add(f);
+				count++;
+			}
+		}
 		return count;
+	}
+	public static int totalCount(String s, List<String>[] list) {
+		int count = 0;
+		for (int i = 0; i < list[i].size(); i++) {
+			if(list[i].contains(s)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
+	public List<E> reverse() {
+		// TODO Auto-generated method stub
+		if(this.currentSize == 0) {
+			return this;
+		}
+		Node prev = null;
+		Node cur = header;
+		while(cur!=null) {
+			Node next = cur.next;
+			cur.next = prev;
+			prev = cur;
+			cur = next;
+		}
+		
+		return this;
 	}
 }

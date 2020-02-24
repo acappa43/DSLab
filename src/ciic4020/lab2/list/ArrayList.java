@@ -198,15 +198,41 @@ public class ArrayList<E> implements List<E> {
 	public Iterator<E> iterator() {
 		return new ListIterator();
 	}
-	public static int totalCount(String s, List<String>[] list) {
+	public static int totalCount(String s, List<String> list) {
 		int count = 0;
-		
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).contains(s)) {
+				count++;
+			}
+		}
 		return count;
 	}
 
 	@Override
 	public int replaceAll(E e, E f) {
 		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		for (int i = 0; i < elements.length; i++) {
+			if(this.elements[i].equals(e)) {
+				this.remove(i);
+				this.add(f);
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
+	public List<E> reverse() {
+		// TODO Auto-generated method stub
+		List<E> result = new ArrayList<E>(this.currentSize);
+		if(this.currentSize == 0) {
+			return result;
+		}
+		for (int i = currentSize; i >=0; i--) {
+			E o = this.get(i);
+			result.add(i, o);
+		}
+		return result;
 	}
 }    
